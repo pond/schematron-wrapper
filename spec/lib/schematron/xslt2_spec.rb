@@ -3,13 +3,17 @@ require 'spec_helper'
 describe Schematron::XSLT2 do
   SAMPLES_DIR = File.expand_path('../../../../spec/support/samples', __FILE__)
 
+  def ignore_formatting(string)
+    string.gsub(/"file[^"]*/, '').gsub(/[\s]/, '')
+  end
+
   describe 'compile' do
-    subject { Schematron::XSLT2.compile(input_file) }
+    subject { ignore_formatting(Schematron::XSLT2.compile(input_file)) }
 
     context 'parameter is schematron' do
       let(:input_file) { File.read(File.join(SAMPLES_DIR, 'initial.sch')) }
 
-      it { should eq File.read(File.join(SAMPLES_DIR, 'compiled.xsl')) }
+      it { should eq ignore_formatting(File.read(File.join(SAMPLES_DIR, 'compiled.xsl'))) }
     end
   end
 
@@ -17,9 +21,9 @@ describe Schematron::XSLT2 do
     let(:stylesheet_file) { File.read(File.join(SAMPLES_DIR, 'compiled.xsl')) }
     let(:target_xml) { File.read(File.join(SAMPLES_DIR, 'target.xml')) }
 
-    subject { Schematron::XSLT2.validate(stylesheet_file, target_xml).gsub(/"file[^"]*/, '').gsub(/[\s]/, '') }
+    subject { ignore_formatting(Schematron::XSLT2.validate(stylesheet_file, target_xml)) }
 
-    it { should == File.read(File.join(SAMPLES_DIR, 'validation_result.xml')).gsub(/"file[^"]*/, '').gsub(/[\s]/, '') }
+    it { should == ignore_formatting(File.read(File.join(SAMPLES_DIR, 'validation_result.xml'))) }
   end
 
   describe 'get_errors' do
