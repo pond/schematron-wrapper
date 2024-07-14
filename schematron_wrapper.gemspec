@@ -8,18 +8,17 @@ Gem::Specification.new do |spec|
   spec.version       = Schematron::VERSION
 
   spec.authors       = ['AgileFreaks']
-  spec.email         = ['office@agilefreaks.com']
-  spec.description   = 'A ruby gem that wrappers various schematron implementations so they can be easily used in ruby'
+  spec.email         = ['ahodgkin@agilefreaks.com']
+  spec.description   = 'Wrap a Schematron implementation so it can be easily used in Ruby, by calling out to the Java language'
 
   spec.homepage      = 'https://github.com/Agilefreaks/schematron-wrapper'
   spec.require_paths = ['lib']
-  spec.rubygems_version = '1.0.0'
-  spec.summary       = 'Schematron XSLT 2.0 validator using Saxon9-HE'
-  
+  spec.summary       = 'Schematron XSLT 2.0 validator using Saxon 12.5 HE'
+
   spec.license       = 'Mozilla Public License, version 2.0'
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
 
-  spec.add_development_dependency 'nokogiri', '~> 1.6'
+  spec.add_development_dependency 'nokogiri', '~> 1.16'
 end
