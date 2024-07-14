@@ -12,7 +12,7 @@ module Schematron
 
     def self.compile(schematron)
       temp_schematron = process_includes(schematron)
-      temp_schematron = expand_abstract_patterns(temp_schematron)
+      # temp_schematron = expand_abstract_patterns(temp_schematron)
 
       create_stylesheet(temp_schematron)
     end
